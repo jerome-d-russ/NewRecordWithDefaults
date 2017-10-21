@@ -1,0 +1,7 @@
+<design:component label="New Record With Defaults">
+    <design:attribute name="newRecordEntityName" label="New Record Entity" description="The name of the object to copy to." />
+    <design:attribute name="buttonLabel" label="Button Label" />
+    <design:attribute name="styling" label="SLDS Styles To Apply" description="The name SLDS classes to apply to the Element that houses the Button, space delimited." />
+    <design:attribute name="dynamicFields" label="Dynamic Field Map" description="A list of fields to copy from, to: from1,to1;from2,to2" />
+    <design:attribute name="staticFields" label="Static Field Map" description="A list of fields to copy to, from Static text: to1,static text;to2,more static text" />
+</design:component>

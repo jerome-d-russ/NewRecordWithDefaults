@@ -1,0 +1,43 @@
+<aura:component implements="force:hasRecordId,flexipage:availableForRecordHome">
+
+    <!-- inputs from design file -->
+    <aura:attribute name="buttonLabel" type="String" default="Click Me!"/>
+    <aura:attribute name="styling" type="String" default="slds-align_absolute-center"/>
+    <aura:attribute name="dynamicFields" type="String" default=""/>
+    <aura:attribute name="staticFields" type="String" default=""/>
+    <aura:attribute name="newRecordEntityName" type="String"/>
+
+    <!-- internally used -->
+    <aura:attribute name="recorddata" type="Object" description="A record representing the current page the user is on."/>
+    <aura:attribute name="record" type="Object" description="A record representing the current page the user is on."/>
+    <aura:attribute name="error" type="String" default="" description="If there are any problems loading the record, ..."/>
+    <aura:attribute name="fieldValueMap" type="Object"/>
+
+    <!-- take action on it -->
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/>
+
+    <!-- The button! All hail the button! -->
+    <div class="{!v.styling}">
+    	<!-- Disabled until we get the current page's record from Lightning Data Service -->
+        <lightning:button aura:id="button" variant="brand" label="{!v.buttonLabel}" onclick="{!c.handleClick}" disabled="true"/>
+    </div>
+
+    <!-- Loads the record the user is currently viewing -->
+	<!-- Not setting a recordId or fields, we'll set them in the init handler and reload there -->
+    <force:recordData aura:id="frd"
+                      mode="VIEW"
+                      layoutType="FULL"
+                      targetFields="{!v.record}"
+                      targetError="{!v.error}"
+                      recordUpdated="{!c.handleRecordUpdated}"
+    />
+
+    <!-- Error output -->
+    <aura:if isTrue="{!v.error.length > 0}">
+        <ui:outputText value="{!v.error}"/>
+    </aura:if>
+    <aura:if isTrue="{!v.errorFromCreate.length > 0}">
+        <ui:outputText value="{!v.errorFromCreate}"/>
+    </aura:if>
+
+</aura:component>
